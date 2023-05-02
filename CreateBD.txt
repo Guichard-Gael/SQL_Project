@@ -1,0 +1,44 @@
+DROP DATABASE IF EXISTS `school`;
+CREATE DATABASE `school`;
+
+USE `school`;
+
+DROP TABLE IF EXISTS `Student`;
+CREATE TABLE `Student` (
+	`numstud` int(10) NOT NULL, 
+	`name` varchar(50) NOT NULL,
+	`firstname` varchar(20) NOT NULL,
+	`dateofbirth` date NOT NULL,
+	`street` varchar(30) NOT NULL,
+	`postalcod` varchar(5) NOT NULL,
+	city varchar(20) NOT NULL,
+	PRIMARY KEY (`numstud`)
+);
+
+DROP TABLE IF EXISTS `Matter`;
+CREATE TABLE `Matter` (
+	`codemat` char(5) NOT NULL,
+	`working` varchar(50) NOT NULL,
+	`coef` float(1) NOT NULL,
+	PRIMARY KEY (`codemat`)
+);
+
+DROP TABLE IF EXISTS `Test`;
+CREATE TABLE `Test` (
+	`numtest` smallint(4) NOT NULL,
+	`testdate` date NOT NULL,
+	`place` varchar(30) NOT NULL,
+	`codemat` char(5) NOT NULL, 
+	PRIMARY KEY (`numtest`),
+	FOREIGN KEY (`codemat`) REFERENCES `Matter` (`codemat`)
+);
+
+DROP TABLE IF EXISTS `Notation`;
+CREATE TABLE `Notation` (
+	`score` float(2) NOT NULL,
+	`numstud` int(10) NOT NULL,
+	`numtest` smallint(4) NOT NULL,	
+	FOREIGN KEY (`numstud`) REFERENCES `Student` (`numstud`),
+	FOREIGN KEY (`numtest`) REFERENCES `Test` (`numtest`)
+);
+

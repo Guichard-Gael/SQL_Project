@@ -1,5 +1,5 @@
 INSERT INTO `Student` (`numstud`, `name`, `firstname`, `dateofbirth`, `street`, `postalcod`, `city`) VALUES 
-(1, "Dupond", "Paul", '2005-02-13', "11 Rue Charles De Gaulle", "44470", "Carquefou"),
+(1, "Dupont", "Paul", '2005-02-13', "11 Rue Charles De Gaulle", "44470", "Carquefou"),
 (2, "Durand", "Pierre", '2005-05-23', "5 Rue du Tisserand", "44800", "Saint-Herblain"),
 (3, "Martin", "Cindy", '2005-06-28', "30 Bd des Belges", "44000", "Nantes"),
 (4, "Smith", "Elisabeth", '2004-12-10', "23 Rue Félix Lemoine", "44000", "Nantes"),

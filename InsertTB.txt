@@ -10,7 +10,7 @@ INSERT INTO `Student` (`numstud`, `name`, `firstname`, `dateofbirth`, `street`, 
 INSERT INTO `Matter` (`codemat`, `working`, `coef`) VALUES 
 ("MATHS", "Mathématique", 3.0),
 ("HISTO", "Histoire", 1.5),
-("FRANC", "Francçais", 1.0);
+("FRANC", "Français", 1.0);
 
 INSERT INTO `Test` (`numtest`, `testdate`, `place`, `codemat`) VALUES 
 (1, "2014-06-25", "salle 403", "MATHS"),

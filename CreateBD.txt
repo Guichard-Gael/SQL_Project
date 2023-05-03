@@ -5,13 +5,13 @@ USE `school`;
 
 DROP TABLE IF EXISTS `Student`;
 CREATE TABLE `Student` (
-	`numstud` int(10) NOT NULL, 
+	`numstud` int(10) NOT NULL AUTO_INCREMENT, 
 	`name` varchar(50) NOT NULL,
 	`firstname` varchar(20) NOT NULL,
 	`dateofbirth` date NOT NULL,
 	`street` varchar(30) NOT NULL,
 	`postalcod` varchar(5) NOT NULL,
-	city varchar(20) NOT NULL,
+	`city` varchar(50) NOT NULL,
 	PRIMARY KEY (`numstud`)
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE `Matter` (
 
 DROP TABLE IF EXISTS `Test`;
 CREATE TABLE `Test` (
-	`numtest` smallint(4) NOT NULL,
+	`numtest` smallint(4) NOT NULL AUTO_INCREMENT,
 	`testdate` date NOT NULL,
 	`place` varchar(30) NOT NULL,
 	`codemat` char(5) NOT NULL, 

@@ -1,0 +1,8 @@
+Wording and coefficient (expressed as a percentage) of each subject:
+
+SELECT `working`, CONCAT(ROUND((`coef` *100/ (SELECT SUM(`coef`) FROM `Matter`)),2), "%") AS `coefficients` FROM `Matter`;
+
+
+Sum of coefficients of all subject:
+
+SELECT SUM(`coef`) FROM `Matter`;

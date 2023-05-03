@@ -1,0 +1,91 @@
+Total number of tests:
+
+SELECT COUNT(`numtest`) FROM `Test`;
+
+
+List of score, specifying for each the name and first name of the student who obtained it:
+
+SELECT `Notation`.`score`, `Student`.`name`, `Student`.`firstname` FROM `Notation`
+INNER JOIN `Student`
+ON `Notation`.`numstud` = `Student`.`numstud`;
+
+
+List of score, specifying for each the name and first name of the student who obtained it and the wording of the matter concerned:
+
+SELECT `Notation`.`score`, `Student`.`name`, `Student`.`firstname`, `Matter`.`working` FROM `Notation`
+INNER JOIN `Student`
+ON `Notation`.`numstud` = `Student`.`numstud`
+INNER JOIN `Test`
+ON `Notation`.`numtest` = `Test`.`numtest`
+RIGHT JOIN `Matter`
+ON `Test`.`codemat` = `Matter`.`codemat`;
+
+
+List of score greater than or equal to 10:
+
+SELECT `score` FROM `Notation`
+WHERE `score` >= 10;
+
+
+Last name and first name of the students who obtained at least a score equal to 20:
+
+SELECT `Student`.`name`, `Student`.`firstname` FROM `Notation`
+INNER JOIN `Student`
+ON `Notation`.`numstud` = `Student`.`numstud`
+WHERE `score` >= 20;
+
+
+Average scores for each student (indicate name and first name):
+
+SELECT `Student`.`name`, `Student`.`firstname`, ROUND((SUM(`Notation`.`score` * `Matter`.`coef`) / SUM(`Matter`.`coef`) ),2) AS `average` FROM `Notation`
+INNER JOIN `Test`
+ON `Notation`.`numtest` = `Test`.`numtest`
+RIGHT JOIN `Matter`
+ON `Test`.`codemat` = `Matter`.`codemat`
+INNER JOIN `Student`
+ON `Notation`.`numstud` = `Student`.`numstud`
+GROUP BY `Notation`.`numstud`;
+
+
+List of tests whose date is between January 1 and June 30, 2014:
+
+SELECT * FROM `Test`
+WHERE `testdate` BETWEEN "2014-01-01" AND "2014-06-30";
+
+
+List of tests (number, date and place) including the matter of the subject:
+
+SELECT `Test`.`numtest` AS `number` , `Test`.`testdate` AS `date`, `Test`.`place`, `Matter`.* FROM `Test`
+INNER JOIN `Matter`
+ON `Test`.`codemat` = `Matter`.`codemat`;
+
+
+Average scores for each student (indicate name and first name), ranked from best to worst:
+
+SELECT `Student`.`name`, `Student`.`firstname`, ROUND((SUM(`Notation`.`score` * `Matter`.`coef`) / SUM(`Matter`.`coef`) ),2) AS `average` FROM `Notation`
+INNER JOIN `Test`
+ON `Notation`.`numtest` = `Test`.`numtest`
+RIGHT JOIN `Matter`
+ON `Test`.`codemat` = `Matter`.`codemat`
+INNER JOIN `Student`
+ON `Notation`.`numstud` = `Student`.`numstud`
+GROUP BY `Notation`.`numstud`
+ORDER BY `average` DESC;
+
+
+Average scores for matter (indicate the wording) comprising more than one test:
+
+SELECT `Matter`.`working`, ROUND(AVG(`Notation`.`score`),2) AS `average` FROM `Matter`
+INNER JOIN `Test`
+ON `Matter`.`codemat` = `Test`.`codemat`
+INNER JOIN `Notation`
+ON `Test`.`numtest` = `Notation`.`numtest`
+GROUP BY `Matter`.`working`
+HAVING COUNT(DISTINCT `Test`.`testdate`) >1;
+
+
+Average of score obtained in the tests (indicate the number of the test) where less than 6 students were rated:
+
+SELECT `numtest` AS `number of the test`, AVG(`score`) AS `average` FROM `Notation`
+GROUP BY `numtest`
+HAVING COUNT(`score`) < 6;
